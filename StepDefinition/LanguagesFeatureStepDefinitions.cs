@@ -60,12 +60,13 @@ namespace OnboardProjectMars.StepDefinition
             Assert.That(newValidLevel == languageLevel, languageLevel + " was not added successfully");
         }
        
-        // TC:004 Verify that the user can delete a language from the list.
+        // TC:008 Verify that the user can delete a language from the list.
+
         [When(@"I click on the delete button of a language")]
         public void WhenIClickOnTheDeleteButtonOfALanguage()
         {
             // Delete all languages
-            languagesFeatureObject.DeleteAllLanguages(driver);
+            languagesFeatureObject.DeleteAllLanguagesAndSkills(driver);
 
         }
 
@@ -77,7 +78,7 @@ namespace OnboardProjectMars.StepDefinition
             Assert.That(numberOfDeleteButtons == 0, "The language was wrongly deleted to the profile");
         }
 
-        // TC:005 Verify that the user can cancel adding a new language.
+        // TC:004 Verify that the user can cancel adding a new language.
 
         [When(@"I type a '([^']*)' and choose a '([^']*)' and I click on the cancel button")]
         public void WhenITypeAAndChooseAAndIClickOnTheCancelButton(string languageName, string languageLevel)
@@ -92,12 +93,70 @@ namespace OnboardProjectMars.StepDefinition
             Assert.That(numberOfCancelButtons == 0, "The language was wrongly added to the profile");
         }
 
+        // TC:005 Verify that the user cannot add a language without selecting a level.
+
+        [When(@"I type a '([^']*)' and I do not choose a language level and I click on the add button")]
+        public void WhenITypeAAndIDoNotChooseALanguageLevelAndIClickOnTheCancelButton(string languageName)
+        {
+            languagesFeatureObject.AddANewLanguageWithoutSelectingALevel(driver, languageName);
+        }
+
+        [Then(@"an error message should be displayed")]
+        public void ThenAnErrorMessageShouldBeDisplayed()
+        {
+            string errorMessage = languagesFeatureObject.GetErrorMessage(driver);
+            Assert.That(errorMessage == "Please enter language and level", "The error message was not displayed");
+        }
+
+        // TC:006 Verify that the user cannot add a language without entering the language name.
+
+        [When(@"I do not type a LanguageName and I choose a '([^']*)'")]
+        public void WhenIDoNotTypeALanguageNameAndIChooseA(string languageLevel)
+        {
+            languagesFeatureObject.AddANewLanguageWithoutEnteringTheLanguageName(driver, languageLevel);
+
+        }
+
+        // TC:007 Verify that the user can successfully edit a language level.
+
+        [When(@"I click on the edit button of a language")]
+        public void WhenIClickOnTheEditButtonOfALanguage()
+        {
+            languagesFeatureObject.EditLanguageLevel(driver);
+        }
+
+        [When(@"I change the language level to '([^']*)'")]
+        public void WhenIChangeTheLanguageLevelTo(string NewLanguageLevel)
+        {
+            languagesFeatureObject.ChangeLanguageLevel(driver, NewLanguageLevel);
+        }
+
+        [Then(@"the language level should be updated to '([^']*)'")]
+        public void ThenTheLanguageLevelShouldBeUpdatedTo(string NewLanguageLevel)
+        {
+            string updatedLanguageLevel = languagesFeatureObject.GetUpdatedLanguageLevel(driver, NewLanguageLevel);
+            Assert.That(updatedLanguageLevel == NewLanguageLevel, "The language level was not updated successfully");
+        }
+
+        // TC:009 Verify that the user cannot add the same language twice.
+        [When(@"I try to add the same '([^']*)' and same '([^']*)'")]
+        public void WhenITryToAddTheSameAndDiferent(string languageName, string NewLanguageLevel)
+        {
+            languagesFeatureObject.AddTheSameLanguageTwice(driver, languageName, NewLanguageLevel);
+        }
+
+        [Then(@"an duplicate data error message should be displayed")]
+        public void ThenAnDuplicateDataErrorMessageShouldBeDisplayed()
+        {
+            string errorMessage = languagesFeatureObject.GetErrorMessageForAddingTheSameLanguageTwice(driver);
+            Assert.That(errorMessage == "This language is already exist in your language list.", "The error message was not displayed");
+        }
 
         [AfterScenario]
         public void ThenDeleteAllAddedLanguagesAfterTest()
         {
             // Clean up added languages after the scenario
-            languagesFeatureObject.DeleteAllLanguages(driver);
+            languagesFeatureObject.DeleteAllLanguagesAndSkills(driver);
             driver.Quit();
 
         }
