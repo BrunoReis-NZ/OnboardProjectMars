@@ -61,7 +61,7 @@ namespace OnboardProjectMars.TestCases
 
         public void DeleteAllLanguagesAndSkills(IWebDriver driver)
         {
-            Thread.Sleep(3000); // Adjust sleep time as needed for your application
+            Thread.Sleep(3000); // I tried to use the Wait class but it didnt work, so I used Thread.Sleep instead
 
             // Keep looping until no delete buttons are found
             while (driver.FindElements(By.XPath("//i[contains(@class,'remove icon')]")).Count > 0)
@@ -71,17 +71,17 @@ namespace OnboardProjectMars.TestCases
                 deleteButton.Click();
 
                 // Add a short wait to allow the UI to update after each click
-                Thread.Sleep(3000); // Adjust sleep time as needed for your application
+                Thread.Sleep(3000); // I tried to use the Wait class but it didnt work, so I used Thread.Sleep instead
             }
         }
 
         public int GetNumberOfDeleteButton(IWebDriver driver)
         {
-            Thread.Sleep(3000); // Adjust sleep time as needed for your application
+            Thread.Sleep(3000); // I tried to use the Wait class but it didnt work, so I used Thread.Sleep instead
 
             // Find all elements with the "Delete" button
             var deleteButtons = driver.FindElements(By.XPath("//i[contains(@class,'remove icon')]"));
-            Thread.Sleep(3000); // Adjust sleep time as needed for your application
+            Thread.Sleep(3000); // I tried to use the Wait class but it didnt work, so I used Thread.Sleep instead
 
             // Return the number of elements found
             return deleteButtons.Count;

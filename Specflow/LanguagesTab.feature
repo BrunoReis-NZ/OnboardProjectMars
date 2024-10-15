@@ -1,4 +1,4 @@
-﻿Feature: LanguagesFeature
+﻿Feature: LanguagesTab
 
 As a Project Mars user 
 I would be able to insert what languages I know and level of proficiency
@@ -16,7 +16,6 @@ Scenario Outline: Verify that a user can successfully add a new language with a 
 
 	| LanguageName | LanguageLevel		|
 	| English      | Basic				|
-
 
 @order2
 @TC_008
@@ -57,7 +56,6 @@ Scenario Outline: Verify that the user cannot add a language without selecting a
 
 	| LanguageName	|
 	| Japanese		|
-
 
 @order5
 @TC_006

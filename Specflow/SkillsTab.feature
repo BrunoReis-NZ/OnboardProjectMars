@@ -1,4 +1,4 @@
-﻿Feature: SkillsFeature
+﻿Feature: SkillsTab
 
 As a Project Mars user 
 I would be able to insert what Skills I know and level of proficiency

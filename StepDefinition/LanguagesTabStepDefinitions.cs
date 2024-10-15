@@ -9,7 +9,7 @@ using TechTalk.SpecFlow;
 namespace OnboardProjectMars.StepDefinition
 {
     [Binding]
-    public class LanguagesFeatureStepDefinitions : CommonDriver
+    public class LanguagesTabStepDefinitions : CommonDriver
     {
         // LoginPage object initialization and definition
         LoginPage loginPageObject = new LoginPage();
@@ -42,7 +42,7 @@ namespace OnboardProjectMars.StepDefinition
         // TC:003 Verify that a user can successfully add a new language with a valid name and level.
 
         [When(@"I add a new language with a valid '([^']*)' and valid '([^']*)'")]
-        public void WhenIAddANewLanguageWithAValidAndValid(string languageName, string languageLevel)
+        public void WhenIAddANewLanguageWithAValidNameAndValidLevel(string languageName, string languageLevel)
         {
             // add a new language with a valid name and level
             languagesFeatureObject.AddANewLanguageWithAValidNameAndLevel(driver, languageName, languageLevel);
@@ -81,7 +81,7 @@ namespace OnboardProjectMars.StepDefinition
         // TC:004 Verify that the user can cancel adding a new language.
 
         [When(@"I type a '([^']*)' and choose a '([^']*)' and I click on the cancel button")]
-        public void WhenITypeAAndChooseAAndIClickOnTheCancelButton(string languageName, string languageLevel)
+        public void WhenITypeALanguageNameAndChooseALanguageLevelAndIClickOnTheCancelButton(string languageName, string languageLevel)
         {
             languagesFeatureObject.CancelAddingANewLanguage(driver, languageName, languageLevel);
         }
@@ -96,7 +96,7 @@ namespace OnboardProjectMars.StepDefinition
         // TC:005 Verify that the user cannot add a language without selecting a level.
 
         [When(@"I type a '([^']*)' and I do not choose a language level and I click on the add button")]
-        public void WhenITypeAAndIDoNotChooseALanguageLevelAndIClickOnTheCancelButton(string languageName)
+        public void WhenITypeALanguageNameAndIDoNotChooseALanguageLevelAndIClickOnTheCancelButton(string languageName)
         {
             languagesFeatureObject.AddANewLanguageWithoutSelectingALevel(driver, languageName);
         }
@@ -111,7 +111,7 @@ namespace OnboardProjectMars.StepDefinition
         // TC:006 Verify that the user cannot add a language without entering the language name.
 
         [When(@"I do not type a LanguageName and I choose a '([^']*)'")]
-        public void WhenIDoNotTypeALanguageNameAndIChooseA(string languageLevel)
+        public void WhenIDoNotTypeALanguageNameAndIChooseALanguageLevel(string languageLevel)
         {
             languagesFeatureObject.AddANewLanguageWithoutEnteringTheLanguageName(driver, languageLevel);
 
@@ -126,13 +126,13 @@ namespace OnboardProjectMars.StepDefinition
         }
 
         [When(@"I change the language level to '([^']*)'")]
-        public void WhenIChangeTheLanguageLevelTo(string NewLanguageLevel)
+        public void WhenIChangeTheLanguageLevelToNewLanguageLevel(string NewLanguageLevel)
         {
             languagesFeatureObject.ChangeLanguageLevel(driver, NewLanguageLevel);
         }
 
         [Then(@"the language level should be updated to '([^']*)'")]
-        public void ThenTheLanguageLevelShouldBeUpdatedTo(string NewLanguageLevel)
+        public void ThenTheLanguageLevelShouldBeUpdatedToNewLanguageLevel(string NewLanguageLevel)
         {
             string updatedLanguageLevel = languagesFeatureObject.GetUpdatedLanguageLevel(driver, NewLanguageLevel);
             Assert.That(updatedLanguageLevel == NewLanguageLevel, "The language level was not updated successfully");
@@ -140,9 +140,9 @@ namespace OnboardProjectMars.StepDefinition
 
         // TC:009 Verify that the user cannot add the same language twice.
         [When(@"I try to add the same '([^']*)' and same '([^']*)'")]
-        public void WhenITryToAddTheSameAndDiferent(string languageName, string NewLanguageLevel)
+        public void WhenITryToAddTheSameLanguageNameAndSameLanguageLevel(string languageName, string LanguageLevel)
         {
-            languagesFeatureObject.AddTheSameLanguageTwice(driver, languageName, NewLanguageLevel);
+            languagesFeatureObject.AddTheSameLanguageTwice(driver, languageName, LanguageLevel);
         }
 
         [Then(@"an duplicate data error message should be displayed")]

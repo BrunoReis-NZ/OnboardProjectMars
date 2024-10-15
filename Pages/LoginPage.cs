@@ -15,10 +15,10 @@ namespace OnboardProjectMars.Pages
         {
             // Launch the Mars  Website
             driver.Navigate().GoToUrl("http://localhost:5000/");
+            // Maximize the browser
             driver.Manage().Window.Maximize();
 
             // Identify username and password and provide values and click on the login button
-
             IWebElement signIn = driver.FindElement(By.XPath("//a[contains(text(),'Sign In')]"));
             signIn.Click();
 
